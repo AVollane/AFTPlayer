@@ -9,6 +9,9 @@ namespace AvaPlayer.Models.Logic
 {
     public class Playlist
     {
+        public delegate void PlaylistHandler(object? sender, EventArgs e);
+        public event PlaylistHandler EndReached;
+
         private Queue<Media> _mediaQueue;
         public Playlist()
         {
@@ -20,7 +23,10 @@ namespace AvaPlayer.Models.Logic
             get
             {
                 if (_mediaQueue.Count == 0)
+                {
+                    EndReached.Invoke(this, new EventArgs());
                     return true;
+                }
                 return false;
             }
         }

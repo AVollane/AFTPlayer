@@ -11,6 +11,11 @@ namespace AvaPlayer.Models.Extensions
 {
     public static class MediaPlayerExtensions
     {
+        /// <summary>
+        /// Plays playlist in MediaPlayer control
+        /// </summary>
+        /// <param name="mediaPlayer">Playable media player</param>
+        /// <param name="playlist">Playlist created from folder</param>
         public static void PlayPlaylist(this MediaPlayer mediaPlayer, Playlist playlist)
         {
             mediaPlayer.EndReached += (object? sender, EventArgs e) =>

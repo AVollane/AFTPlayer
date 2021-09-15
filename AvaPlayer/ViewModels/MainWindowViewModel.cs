@@ -26,6 +26,14 @@ namespace AvaPlayer.ViewModels
         {
             _mediaFolderPath = ConfigurationManager.AppSettings.Get("MediaFolder");
             Playlist playlist = PlaylistCreator.CreatePlayList(_libVlc, _mediaFolderPath);
+            playlist.EndReached += (object? sender, EventArgs e) =>
+            {
+                Task.Run(() =>
+                {
+                    playlist = PlaylistCreator.CreatePlayList(_libVlc, _mediaFolderPath);
+                    MediaPlayer.PlayPlaylist(playlist);
+                });
+            };
             MediaPlayer.PlayPlaylist(playlist);
         }
 
