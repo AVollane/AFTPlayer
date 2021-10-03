@@ -2,6 +2,7 @@
 using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,10 +18,7 @@ namespace AvaPlayer.Models.Extensions
             {
                 Task.Run(() =>
                 {
-                    if (!playlist.IsEmpty)
-                    {
-                        mediaPlayer.Play(playlist.GetMedia());
-                    }
+                    mediaPlayer.Play(playlist.GetMedia());
                 });
             };
             mediaPlayer.Play(playlist.GetMedia());
