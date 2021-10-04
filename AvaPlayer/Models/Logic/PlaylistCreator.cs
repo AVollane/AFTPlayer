@@ -33,7 +33,6 @@ namespace AvaPlayer.Models.Logic
                 for(int j = 0; j < times; j++)
                 {
                     Media media = new Media(libVlc, new Uri(fi.FullName));
-                    //playlist.AddMedia(media);
                     medias.Add(media);
                 }
             }

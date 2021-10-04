@@ -10,32 +10,32 @@ namespace AvaPlayer.Models.Logic
 {
     public class Playlist
     {
-        private Queue<Media> _mediaQueue;
         private List<Media> _mediaList;
         private Random _random;
-
         private int _elementIndex = 1;
+
         public Playlist()
         {
-            _mediaQueue = new Queue<Media>();
             _mediaList = new List<Media>();
             _random = new Random();
         }
+
+        /// <summary>
+        /// Добавляет медиа в плейлист
+        /// </summary>
+        /// <param name="media"></param>
         public void AddMedia(Media media)
         {
-            _mediaQueue.Enqueue(media);
             _mediaList.Add(media);
             _mediaList.Mix();
         }
-        public bool IsEmpty
-        {
-            get
-            {
-                if (_mediaQueue.Count == 0)
-                    return true;
-                return false;
-            }
-        }
+
+        /// <summary>
+        /// Выдаёт следующее медиа из списка
+        /// </summary>
+        /// <returns>
+        /// Media
+        /// </returns>
         public Media GetMedia()
         {
             _elementIndex++;

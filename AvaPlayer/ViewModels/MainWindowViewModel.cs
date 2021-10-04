@@ -16,12 +16,15 @@ namespace AvaPlayer.ViewModels
     public class MainWindowViewModel : ViewModelBase, IDisposable
     {
         private readonly LibVLC _libVlc = new LibVLC();
-        private string _mediaFolderPath;
+        private string? _mediaFolderPath; // Путь к папке с видеороликами
         public MainWindowViewModel()
         {
             MediaPlayer = new MediaPlayer(_libVlc);
         }
 
+        /// <summary>
+        /// Начинает проигрывать видео
+        /// </summary>
         public void Play()
         {
             _mediaFolderPath = ConfigurationManager.AppSettings.Get("MediaFolder");
@@ -29,8 +32,14 @@ namespace AvaPlayer.ViewModels
             MediaPlayer.PlayPlaylist(playlist);
         }
 
+        /// <summary>
+        /// Основной медиаплеер
+        /// </summary>
         public MediaPlayer MediaPlayer { get; }
 
+        /// <summary>
+        /// Освобождает ресурсы модели представления
+        /// </summary>
         public void Dispose()
         {
             MediaPlayer?.Dispose();

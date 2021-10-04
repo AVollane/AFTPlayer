@@ -25,6 +25,11 @@ namespace AvaPlayer.Views
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Обрабатывает событие открытия окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnOpened(object sender, EventArgs e)
         {
             var vm = DataContext as MainWindowViewModel;
