@@ -71,8 +71,6 @@ namespace AvaPlayer.Models.Logic
                 }
             }
 
-
-
             return new Playlist();
         }
     }

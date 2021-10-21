@@ -17,9 +17,12 @@ namespace AvaPlayer.ViewModels
     {
         private readonly LibVLC _libVlc = new LibVLC();
         private string? _mediaFolderPath; // Путь к папке с видеороликами
+        private string? _introFilePath; // Путь к папке с интро
         public MainWindowViewModel()
         {
             MediaPlayer = new MediaPlayer(_libVlc);
+            _introFilePath = ConfigurationManager.AppSettings.Get("IntroPath");
+            _mediaFolderPath = ConfigurationManager.AppSettings.Get("MediaFolder");
         }
 
         /// <summary>
@@ -27,9 +30,16 @@ namespace AvaPlayer.ViewModels
         /// </summary>
         public void Play()
         {
-            _mediaFolderPath = ConfigurationManager.AppSettings.Get("MediaFolder");
+            Media media = new Media(_libVlc, _introFilePath);
+            MediaPlayer.Play(media);
             Playlist playlist = PlaylistCreator.CreatePlayList(_libVlc, _mediaFolderPath);
-            MediaPlayer.PlayPlaylist(playlist);
+            MediaPlayer.EndReached += (object? sender, EventArgs e) =>
+            {
+                Task.Run(() =>
+                {
+                    MediaPlayer.PlayPlaylist(playlist);
+                });
+            };
         }
 
         /// <summary>
