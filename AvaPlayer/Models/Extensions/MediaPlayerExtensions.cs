@@ -1,4 +1,5 @@
-﻿using AvaPlayer.Models.Logic;
+﻿using AFTPlayer.Models.Logging;
+using AvaPlayer.Models.Logic;
 using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace AvaPlayer.Models.Extensions
         /// </summary>
         /// <param name="mediaPlayer"></param>
         /// <param name="playlist"></param>
-        public static void PlayPlaylist(this MediaPlayer mediaPlayer, Playlist playlist)
+        public static void PlayPlaylist(this MediaPlayer mediaPlayer, Playlist playlist, ILogger logger)
         {
             mediaPlayer.EndReached += (object? sender, EventArgs e) =>
             {
@@ -25,7 +26,8 @@ namespace AvaPlayer.Models.Extensions
                 // обработать событие достижения конца видеоролика
                 Task.Run(() =>
                 {
-                    mediaPlayer.Play(playlist.GetMedia());
+                    Media media = playlist.GetMedia();
+                    mediaPlayer.Play(media);
                 });
             };
             mediaPlayer.Play(playlist.GetMedia());

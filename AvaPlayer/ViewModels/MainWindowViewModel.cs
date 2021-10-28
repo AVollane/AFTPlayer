@@ -10,6 +10,7 @@ using AvaPlayer.Views;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using System.Configuration;
+using AFTPlayer.Models.Logging;
 
 namespace AvaPlayer.ViewModels
 {
@@ -33,11 +34,12 @@ namespace AvaPlayer.ViewModels
             Media media = new Media(_libVlc, _introFilePath);
             MediaPlayer.Play(media);
             Playlist playlist = PlaylistCreator.CreatePlayList(_libVlc, _mediaFolderPath);
+            ILogger logger = Logger.GetLogger();
             MediaPlayer.EndReached += (object? sender, EventArgs e) =>
             {
                 Task.Run(() =>
                 {
-                    MediaPlayer.PlayPlaylist(playlist);
+                    MediaPlayer.PlayPlaylist(playlist, logger);
                 });
             };
         }
