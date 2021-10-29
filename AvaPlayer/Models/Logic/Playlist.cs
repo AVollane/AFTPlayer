@@ -39,9 +39,17 @@ namespace AvaPlayer.Models.Logic
         public Media GetMedia()
         {
             _elementIndex++;
-            if (_elementIndex >= _mediaList.Count)
+            if (_elementIndex >= _mediaList.Count || _elementIndex == 0 || _elementIndex > _mediaList.Count - 1)
                 _elementIndex = 1;
-            return _mediaList[_elementIndex - 1];
+            try
+            {
+                return _mediaList[_elementIndex - 1];
+            }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                _elementIndex++;
+                return _mediaList.First();
+            }
         }
     }
 }
