@@ -17,4 +17,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.16" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileReceiverLib\FileReceiverLib.csproj" />
+  </ItemGroup>
 </Project>
