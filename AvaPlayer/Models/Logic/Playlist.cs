@@ -12,7 +12,7 @@ namespace AvaPlayer.Models.Logic
     {
         private List<Media> _mediaList;
         private Random _random;
-        private int _elementIndex = 1;
+        private int _elementIndex = 0;
 
         public Playlist()
         {
@@ -40,10 +40,10 @@ namespace AvaPlayer.Models.Logic
         {
             _elementIndex++;
             if (_elementIndex >= _mediaList.Count || _elementIndex == 0 || _elementIndex > _mediaList.Count - 1)
-                _elementIndex = 1;
+                _elementIndex = 0;
             try
             {
-                return _mediaList[_elementIndex - 1];
+                return _mediaList[_elementIndex];
             }
             catch(ArgumentOutOfRangeException ex)
             {
