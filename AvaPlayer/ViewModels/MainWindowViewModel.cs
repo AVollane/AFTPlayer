@@ -34,14 +34,7 @@ namespace AvaPlayer.ViewModels
             Media media = new Media(_libVlc, _introFilePath);
             MediaPlayer.Play(media);
             Playlist playlist = PlaylistCreator.CreatePlayList(_libVlc, _mediaFolderPath);
-            ILogger logger = Logger.GetLogger();
-            MediaPlayer.EndReached += (object? sender, EventArgs e) =>
-            {
-                Task.Run(() =>
-                {
-                    MediaPlayer.PlayPlaylist(playlist, logger);
-                });
-            };
+            MediaPlayer.PlayPlaylist(playlist);
         }
 
         /// <summary>

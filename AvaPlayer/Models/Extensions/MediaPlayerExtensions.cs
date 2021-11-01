@@ -13,12 +13,7 @@ namespace AvaPlayer.Models.Extensions
 {
     public static class MediaPlayerExtensions
     {
-        /// <summary>
-        /// Проигрывает плейлист
-        /// </summary>
-        /// <param name="mediaPlayer"></param>
-        /// <param name="playlist"></param>
-        public static void PlayPlaylist(this MediaPlayer mediaPlayer, Playlist playlist, ILogger logger)
+        public static void PlayPlaylist(this MediaPlayer mediaPlayer, Playlist playlist)
         {
             mediaPlayer.EndReached += (object? sender, EventArgs e) =>
             {

@@ -10,10 +10,7 @@ namespace AvaPlayer.Models.Logic
 {
     public class Playlist
     {
-        private List<Media> _mediaList;
-        private Random _random;
-        private int _elementIndex = 0;
-
+        private Queue<Media> _mediaQueue;
         public Playlist()
         {
             _mediaList = new List<Media>();
@@ -43,13 +40,14 @@ namespace AvaPlayer.Models.Logic
                 _elementIndex = 0;
             try
             {
-                return _mediaList[_elementIndex];
+                if (_mediaQueue.Count == 0)
+                    return true;
+                return false;
             }
-            catch(ArgumentOutOfRangeException ex)
-            {
-                _elementIndex++;
-                return _mediaList.First();
-            }
+        }
+        public Media GetMedia()
+        {
+            return _mediaQueue.Dequeue();
         }
     }
 }
